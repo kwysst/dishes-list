@@ -55,12 +55,16 @@
         #fileControls > button {
             padding: 8px 15px;
             cursor: pointer;
+            margin: 0 5px;
             background-color: var(--button-color);
             color: var(--text-color);
             border: none;
             border-radius: 4px;
             transition: background-color 0.3s ease;
             flex-shrink: 0;
+            }
+            #fileControls > button:last-child {
+                margin-right: 0;
             }
              #fileControls > button:hover {
                 background-color: var(--button-hover-color);
@@ -69,9 +73,7 @@
             #fileControls > button:active {
                 background-color: var(--button-active-color);
             }
-            #fileControls > button:last-child {
-                margin-left: 10px;
-            }
+      
         #controls {
             background-color: var(--controls-bg);
             padding: 20px;
@@ -124,14 +126,14 @@
             background-color: var(--toggle-button-active-color);
         }
 
-         #controls > #generatePdfButton {
-          background-color: var(--pdf-button-color);
+          #generatePdfButton {
+          background-color: var(--pdf-button-color) !important;
         }
         
-       #controls > #generatePdfButton:hover {
+        #generatePdfButton:hover {
             background-color: var(--pdf-button-hover-color);
         }
-       #controls > #generatePdfButton:active {
+       #generatePdfButton:active {
             background-color: var(--pdf-button-active-color);
         }
         
@@ -162,7 +164,6 @@
             padding: 8px;
             border: 1px solid var(--border-color);
             border-radius: 4px;
-            width: 250px;
             box-sizing: border-box;
             flex-grow: 1;
             margin-right: 10px;
@@ -272,11 +273,12 @@
                 flex-direction: column;
                 align-items: baseline;
             }
-            #fileControls > button:last-child {
-                margin: 0;
-            }
             #fileControls > button {
-                margin: 10px 0;
+                margin: 4px 0;
+            }
+            li {
+                flex-direction: column;
+                align-items: baseline;
             }
             li > * {
                 margin-top: 6px;
@@ -289,6 +291,7 @@
             }
             input[type="text"] {
                 margin-right: 0;
+                width: 100%;
             }
         }
 
@@ -299,13 +302,13 @@
         <h1>Менеджер блюд</h1>
         <button id="saveBtn">Дамп в файл</button>
         <button id="loadBtn">Бекап из файла</button>
+        <button id="generatePdfButton">Скачать PDF ингредиентов</button>
       </div>
 
     <div id="controls">
-        <button id="addDishButton">Добавить</button>
         <button id="toggleViewButton">Показать ингредиенты</button>
-        <button id="generatePdfButton" class="hidden">Скачать PDF</button>
         <button id="toggleViewButtonIngredients" class="hidden">Показать блюда</button>
+        <button id="addDishButton">Добавить</button>
     </div>
 
     <ul id="dishList"></ul>
@@ -423,7 +426,7 @@
                 const ingredientsInput = document.createElement('input');
                 ingredientsInput.type = 'text';
                 ingredientsInput.value = dish.ingredients;
-                ingredientsInput.placeholder = "Ингредиенты (через запятую)";
+                ingredientsInput.placeholder = "Ингредиенты (картошка: 4.5, молоко, колбаса 0.5, ...)";
     
                 nameInput.addEventListener('input', () => saveEditedDish(i, nameInput.value, ingredientsInput.value));
                 ingredientsInput.addEventListener('input', () => saveEditedDish(i, nameInput.value, ingredientsInput.value));
@@ -498,14 +501,12 @@
                 dishListElement.classList.add('hidden');
                 addDishButton.classList.add('hidden');
                 toggleViewButton.classList.add('hidden');
-                generatePdfButton.classList.remove('hidden');
                 toggleViewButtonIngredients.classList.remove('hidden');
                 ingredientListDiv.classList.remove('hidden');
                 currentView = 'ingredients';
             } else {
                 addDishButton.classList.remove('hidden');
                 toggleViewButton.classList.remove('hidden');
-                generatePdfButton.classList.add('hidden');
                 toggleViewButtonIngredients.classList.add('hidden');
                 dishListElement.classList.remove('hidden');
                 ingredientListDiv.classList.add('hidden');
