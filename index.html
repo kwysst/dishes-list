@@ -302,7 +302,7 @@
         <h1>Менеджер блюд</h1>
         <button id="saveBtn">Дамп в файл</button>
         <button id="loadBtn">Бекап из файла</button>
-        <button id="generatePdfButton">Скачать PDF ингредиентов</button>
+        <button id="generatePdfButton">Скачать список ингредиентов</button>
       </div>
 
     <div id="controls">
@@ -335,6 +335,14 @@
     
         let currentView = 'dishes';
     
+
+
+        function isMobile() {
+            const userAgent = navigator.userAgent.toLowerCase();
+            return /iphone|ipad|ipod|android|blackberry|windows phone/.test(userAgent);
+        }
+
+
         function saveDishes() {
              localStorage.setItem(DISHES_STORAGE_KEY, JSON.stringify(dishes));
         }
@@ -426,7 +434,7 @@
                 const ingredientsInput = document.createElement('input');
                 ingredientsInput.type = 'text';
                 ingredientsInput.value = dish.ingredients;
-                ingredientsInput.placeholder = "Ингредиенты (картошка: 4.5, молоко, колбаса 0.5, ...)";
+                ingredientsInput.placeholder = "Ингредиенты (картофель 3, 1.5 литра воды, майонез, ...)";
     
                 nameInput.addEventListener('input', () => saveEditedDish(i, nameInput.value, ingredientsInput.value));
                 ingredientsInput.addEventListener('input', () => saveEditedDish(i, nameInput.value, ingredientsInput.value));
@@ -471,12 +479,14 @@
 
         dishes.forEach(dish => {
             if (dish.ingredients) {
-                const ingredients = dish.ingredients.split(/[,;]+/).map(ingredient => ingredient.trim());
+                const ingredients = dish.ingredients
+                    .split(/[,;]+/)
+                    .map(ingredient => ingredient.trim());
 
                 ingredients.forEach(item => {
-                     const parts = item.split(':').map(part => part.trim());
-                    const ingredientName = parts[0];
-                     const quantity = parseFloat(parts[1] || 1); // default 1 if no quantity given
+                    const parts = item.split(':').map(part => part.trim());
+                    const ingredientName = item.replace(/[0-9.]+/g, '').trim();
+                    const quantity = parseFloat(item || 1) || 1; 
 
                      if (ingredientsMap.has(ingredientName)) {
                          ingredientsMap.set(ingredientName, ingredientsMap.get(ingredientName) + quantity);
@@ -585,7 +595,42 @@
             }
             
         });
-        pdf.save('ingredients.pdf'); 
+            if (!isMobile()) {
+                pdf.save('ingredients.pdf'); 
+                return;
+            }
+
+            const pdfBlob = await pdf.output('blob', { filename: 'ingredients.pdf' });
+
+            const shareButton = document.createElement('button');
+            shareButton.textContent = 'Поделиться PDF';
+            shareButton.style.display = 'none';
+            document.body.appendChild(shareButton);
+
+            shareButton.addEventListener('click', async () => {
+                if (navigator.share) {
+                    try {
+                        await navigator.share({
+                            title: 'Список ингредиентов',
+                                files: [
+                                new File([pdfBlob], 'ingredients.pdf', {
+                                type: 'application/pdf'
+                                })
+                            ]
+                        })
+                    }
+                    catch (e) {
+                        pdf.save('ingredients.pdf'); 
+                    }
+                    
+                } else {
+                    pdf.save('ingredients.pdf'); 
+                }
+                shareButton.remove()
+                document.body.removeChild(shareButton);
+            });
+
+            shareButton.click();
         }
     
     
