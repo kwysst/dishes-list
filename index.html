@@ -490,7 +490,7 @@
         ingredientListElement.innerHTML = "";
         Array.from(ingredientsMap).sort((a,b) => a[0] < b[0] ? -1 : 1).map((e) => {
             const listItem = document.createElement('li');
-            listItem.textContent = `${e[0]}: ${Math.ceil(e[1])}`;
+            listItem.textContent = `${e[0]}: ${e[1]}`;
             ingredientListElement.appendChild(listItem);
         })
 
