@@ -1,0 +1,249 @@
+:root {
+    --bg-color: #1a1a1a;
+    --text-color: #f0f0f0;
+    --heading-color: #ddd;
+    --controls-bg: #282828;
+    --item-bg: #333;
+    --border-color: #444;
+    --button-color: #458a45;
+    --button-hover-color: #3b753b;
+    --button-active-color: #306030;
+    --delete-button-color: #d9534f;
+    --delete-button-hover-color: #c9302c;
+    --delete-button-active-color: #ac2925;
+    --toggle-button-color: #666;
+    --toggle-button-hover-color: #777;
+    --toggle-button-active-color: #888;
+    --pdf-button-color: #3498db;
+    --pdf-button-hover-color: #2980b9;
+    --pdf-button-active-color: #1e61a0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+button {
+    height: 32px;
+}
+h1 {
+    color: var(--heading-color);
+    margin: 0px;
+    margin-right: auto;
+}
+#fileControls {
+    background-color: var(--controls-bg);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+#fileControls > button {
+    padding: 8px 15px;
+    cursor: pointer;
+    margin: 0 5px;
+    background-color: var(--button-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    flex-shrink: 0;
+    }
+    #fileControls > button:last-child {
+        margin-right: 0;
+    }
+    #fileControls > button:hover {
+        background-color: var(--button-hover-color);
+    }
+    #fileControls > button:active {
+        background-color: var(--button-active-color);
+    }
+
+#controls {
+    background-color: var(--controls-bg);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#controls > button {
+    padding: 8px 15px;
+    cursor: pointer;
+    background-color: var(--button-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    flex-shrink: 0;
+}
+
+#controls > button:hover {
+    background-color: var(--button-hover-color);
+}
+
+#controls > button:active {
+    background-color: var(--button-active-color);
+}
+
+#controls > #toggleViewButton {
+  background-color: var(--toggle-button-color);
+}
+
+#controls > #toggleViewButton:hover {
+    background-color: var(--toggle-button-hover-color);
+}
+#controls > #toggleViewButton:active {
+    background-color: var(--toggle-button-active-color);
+}
+
+#controls > #toggleViewButtonIngredients {
+    background-color: var(--toggle-button-color);
+}
+
+#controls > #toggleViewButtonIngredients:hover {
+    background-color: var(--toggle-button-hover-color);
+}
+#controls > #toggleViewButtonIngredients:active {
+    background-color: var(--toggle-button-active-color);
+}
+
+#generatePdfButton {
+    background-color: var(--pdf-button-color) !important;
+}
+
+#generatePdfButton:hover {
+    background-color: var(--pdf-button-hover-color);
+}
+#generatePdfButton:active {
+    background-color: var(--pdf-button-active-color);
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 4px;
+    padding: 14px;
+    background-color: var(--item-bg);
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+input[type="text"] {
+    width: 300px;
+}
+textarea {
+    flex: 1;
+}
+input[type="text"],
+textarea {
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-right: 10px;
+    background-color: var(--controls-bg);
+    color: var(--text-color);
+    resize: none;
+    overflow: hidden;
+    text-wrap-mode: nowrap;
+}
+input[type="text"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--button-color);
+}
+
+button {
+    padding: 8px 15px;
+    cursor: pointer;
+    background-color: var(--button-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--button-hover-color);
+}
+
+button:active {
+    background-color: var(--button-active-color);
+}
+
+li > button {
+    margin-left: 6px;
+    flex-shrink: 0;
+    background-color: var(--delete-button-color);
+    align-self: flex-end;
+}
+
+li > button:hover {
+    background-color: var(--delete-button-hover-color);
+}
+
+li > button:active {
+    background-color: var(--delete-button-active-color);
+}
+
+#ingredientList,
+#dishList {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: var(--controls-bg);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+  
+#dishList {
+    display:block;
+}
+
+#ingredientList h2 {
+    margin-top: 0;
+    font-size: 1.2em;
+}
+
+#ingredientList ul {
+    list-style: none;
+    padding: 0;
+}
+
+#ingredientList ul li {
+    background: none;
+    padding: 3px 5px;
+    box-shadow: none;
+    margin-bottom: 2px;
+    color: var(--text-color);
+}
+.hidden {
+    display: none !important;
+}

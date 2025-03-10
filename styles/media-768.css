@@ -1,0 +1,28 @@
+@media (max-width: 768px) {
+    #fileControls  {
+        flex-direction: column;
+        align-items: baseline;
+    }
+    #fileControls > button {
+        margin: 4px 0;
+    }
+    li {
+        flex-direction: column;
+        align-items: baseline;
+    }
+    li > * {
+        margin-top: 6px;
+    }
+    li > *:first-child {
+        margin-top: 0px;
+    }
+    li > button {
+        margin-left: auto;
+        margin-top: 12px;
+    }
+    input[type="text"],
+    textarea {
+        margin-right: 0;
+        width: 100%;
+    }
+}

@@ -1,0 +1,25 @@
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+   #ingredientList, #ingredientList * {
+       visibility: visible;
+       color: black;
+   }
+
+    #ingredientList {
+       position: absolute;
+       left: 0;
+       top: 0;
+        padding: 0;
+        box-shadow: none;
+        background-color: #fff;
+   }
+
+    #ingredientList ul li {
+      margin-bottom: 0;
+        padding: 0;
+    }
+
+}
